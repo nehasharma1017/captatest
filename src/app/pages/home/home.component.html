@@ -1,0 +1,68 @@
+<div class=" col-lg-12 table-responsive">
+  <table id="mytable" class="table table-bordred table-striped">
+    <thead>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data; let i=index">
+        <td *ngIf="!isEdit">{{item.fields.description.stringValue}}</td>
+        <td *ngIf="isEdit"><input type="text" [(ngModel)]="title"></td>
+        
+        <td *ngIf="!isEdit">{{item.fields.title.stringValue}}</td>
+        <td *ngIf="isEdit"><input type="text" [(ngModel)]="desc"></td>
+        
+        <td>
+          <button class="btn btn-xs" data-title="Edit" (click)="editData(item.fields,i)">
+            <i class="far fa-edit" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-xs" data-title="ok" (click)="saveEditedData()" *ngIf="isEdit">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          <button class="btn btn-danger btn-xs" data-title="Delete" (click)="deleteData(item.name)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col=lg-12 marginBot10">
+  <button type="button" class="btn btn-info add-new" data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-plus"></i> Add New</button>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="myform">
+          <div class="form-group">
+            <label for="title" class="col-form-label">Title:</label>
+            <input type="text" (input)="updateState($event)" class="form-control" [(ngModel)]="title" name="title" required>
+            <p *ngIf="titleError" class="alert alert-danger">Title is required</p>
+          </div>
+          <div class="form-group">
+            <label for="desc" class="col-form-label">Description:</label>
+            <input type="text" (input)="updateState($event)" class="form-control" [(ngModel)]="desc" name="desc" required>
+            <p *ngIf="descError" class="alert alert-danger">Description is required</p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addItem()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

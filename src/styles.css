@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.marginTop20{
+    margin-top:20px;
+}
+.marginTop2{
+  margin-top: 2px; 
+}
+.marginBot10{
+    margin-bottom: 10px;
+}
+footer{
+    background-color: black;
+    color: white;
+}
